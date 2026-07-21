@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saif Khalid Afridi | Portfolio</title>
+  <style>
+    /* ---------- RESET & BASE ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f6f9;
+      color: #1a1a2e;
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 3rem 2.5rem;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    }
+
+    /* ---------- HEADER ---------- */
+    .header {
+      text-align: center;
+      border-bottom: 2px solid #eef2f7;
+      padding-bottom: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .avatar {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: #eef2f7;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+      font-weight: 600;
+      color: #2d3748;
+      margin-bottom: 1rem;
+      border: 4px solid #4f46e5;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #1a1a2e;
+    }
+
+    .title {
+      font-size: 1.2rem;
+      color: #4f46e5;
+      font-weight: 500;
+      margin-top: 0.25rem;
+    }
+
+    .tagline {
+      font-size: 1rem;
+      color: #4a5568;
+      margin-top: 0.5rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .badges {
+      margin-top: 1.2rem;
+    }
+
+    .badges a {
+      display: inline-block;
+      padding: 0.5rem 1.2rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin: 0.3rem;
+      transition: 0.2s;
+    }
+
+    .badges a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-linkedin {
+      background: #0a66c2;
+      color: #fff;
+    }
+
+    .btn-github {
+      background: #1a1a2e;
+      color: #fff;
+    }
+
+    .btn-email {
+      background: #e53e3e;
+      color: #fff;
+    }
+
+    /* ---------- SECTION TITLE ---------- */
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin: 2.5rem 0 1.2rem 0;
+      padding-bottom: 0.5rem;
+      border-bottom: 3px solid #4f46e5;
+      display: inline-block;
+    }
+
+    /* ---------- ABOUT ---------- */
+    .about p {
+      color: #2d3748;
+      margin-bottom: 1rem;
+    }
+
+    /* ---------- SKILLS ---------- */
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 0.5rem;
+    }
+
+    .skill-tag {
+      background: #eef2f7;
+      padding: 0.4rem 1.2rem;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #2d3748;
+    }
+
+    /* ---------- PROJECTS ---------- */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .project-card {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid #e2e8f0;
+      transition: 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-card:hover {
+      border-color: #4f46e5;
+      box-shadow: 0 8px 20px rgba(79, 70, 229, 0.08);
+    }
+
+    .project-card h3 {
+      font-size: 1.1rem;
+      color: #1a1a2e;
+      margin-bottom: 0.3rem;
+    }
+
+    .project-card p {
+      font-size: 0.9rem;
+      color: #4a5568;
+      flex-grow: 1;
+    }
+
+    .project-card .tech {
+      margin-top: 0.8rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #4f46e5;
+    }
+
+    .project-card .btn-link {
+      margin-top: 1rem;
+      display: inline-block;
+      background: #4f46e5;
+      color: #fff;
+      padding: 0.4rem 1rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      text-align: center;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+
+    .project-card .btn-link:hover {
+      background: #4338ca;
+    }
+
+    /* ---------- EXPERIENCE ---------- */
+    .exp-item {
+      margin-bottom: 1.5rem;
+    }
+
+    .exp-item h3 {
+      font-size: 1.1rem;
+      color: #1a1a2e;
+    }
+
+    .exp-item .company {
+      font-weight: 600;
+      color: #4f46e5;
+    }
+
+    .exp-item .date {
+      font-size: 0.85rem;
+      color: #718096;
+    }
+
+    .exp-item ul {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 0.3rem;
+    }
+
+    .exp-item ul li {
+      padding-left: 1.2rem;
+      position: relative;
+      color: #2d3748;
+      font-size: 0.95rem;
+    }
+
+    .exp-item ul li::before {
+      content: "•";
+      color: #4f46e5;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+
+    /* ---------- CERTIFICATIONS & LANGUAGES ---------- */
+    .cert-grid,
+    .lang-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem 2rem;
+      margin-top: 0.5rem;
+    }
+
+    .cert-item,
+    .lang-item {
+      background: #f8fafc;
+      padding: 0.3rem 1rem;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+    }
+
+    /* ---------- FOOTER ---------- */
+    .footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 2px solid #eef2f7;
+      color: #718096;
+      font-size: 0.9rem;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 768px) {
+      .container {
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .badges a {
+        display: inline-block;
+        margin: 0.2rem;
+        font-size: 0.8rem;
+        padding: 0.4rem 1rem;
+      }
+
+      .avatar {
+        width: 100px;
+        height: 100px;
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ==================== HEADER ==================== -->
+  <div class="header">
+    <div class="avatar">SK</div>
+    <h1>Saif Khalid Afridi</h1>
+    <div class="title">Supply Chain &amp; Procurement Professional | Data Analytics Enthusiast</div>
+    <p class="tagline">Bridging supply chain operations with data-driven decision making</p>
+    <div class="badges">
+      <a href="https://www.linkedin.com/in/saif-khalid-afridi" target="_blank" class="btn-linkedin">LinkedIn</a>
+      <a href="https://github.com/saifafridi2727" target="_blank" class="btn-github">GitHub</a>
+      <a href="mailto:saifafridi2727@gmail.com" class="btn-email">Email</a>
+    </div>
+  </div>
+
+  <!-- ==================== ABOUT ==================== -->
+  <div class="about">
+    <h2 class="section-title">About Me</h2>
+    <p>Supply Chain &amp; Procurement professional with hands-on experience across sourcing, vendor negotiation, purchase order management, and inventory planning for e-commerce and wholesale operations in the US and UK markets.</p>
+    <p>Skilled in supplier evaluation, cost-effective purchasing decisions, demand forecasting, and maintaining accurate procurement and inventory documentation. Proven track record of coordinating multi-supplier networks to keep replenishment cycles on schedule and reduce stockout risk.</p>
+    <p><strong>📍 Location:</strong> Islamabad, Pakistan</p>
+  </div>
+
+  <!-- ==================== SKILLS ==================== -->
+  <h2 class="section-title">Technical Skills</h2>
+  <div class="skills-grid">
+    <span class="skill-tag">Data Analysis</span>
+    <span class="skill-tag">Google Sheets</span>
+    <span class="skill-tag">Microsoft Excel</span>
+    <span class="skill-tag">PivotTables</span>
+    <span class="skill-tag">Conditional Formatting</span>
+    <span class="skill-tag">COUNTIFS / SUMIFS</span>
+    <span class="skill-tag">Supply Chain Operations</span>
+    <span class="skill-tag">Procurement &amp; Vendor Sourcing</span>
+    <span class="skill-tag">Inventory Planning</span>
+    <span class="skill-tag">Demand Forecasting</span>
+    <span class="skill-tag">Logistics</span>
+    <span class="skill-tag">Purchase Order Management</span>
+    <span class="skill-tag">Supplier Negotiation</span>
+    <span class="skill-tag">Cost &amp; Rate Analysis</span>
+    <span class="skill-tag">Dashboard Design</span>
+  </div>
+
+  <!-- ==================== PROJECTS ==================== -->
+  <h2 class="section-title">Featured Projects</h2>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <h3>📦 ABC Inventory Optimization</h3>
+      <p>Analyzed 3,791 SKUs using the Pareto Principle. Classified products into A, B, and C tiers to optimize inventory management.</p>
+      <div class="tech">Google Sheets · PivotTables · SUMIF</div>
+      <a href="https://docs.google.com/spreadsheets/d/1NfMrxZqVr7xhngXmZXVmVjSDYSCnvGkH2hodnbT22nc/edit?usp=sharing" target="_blank" class="btn-link">View Project →</a>
+    </div>
+
+    <div class="project-card">
+      <h3>🌍 Supply Chain Risk Analysis</h3>
+      <p>Analyzed 5,000+ shipments to identify high-risk ports. Built a Red-Yellow-Green heatmap to visualize delay patterns.</p>
+      <div class="tech">Google Sheets · COUNTIFS · Conditional Formatting</div>
+      <a href="https://docs.google.com/spreadsheets/d/1JFwjJk5EkpbK_RY0vCFmJVKxo4k0WsbhXFxR93LemYc/edit?usp=sharing" target="_blank" class="btn-link">View Project →</a>
+    </div>
+
+    <div class="project-card">
+      <h3>🚚 Amazon Last-Mile Delivery</h3>
+      <p>Analyzed 43,739 deliveries to optimize vehicle allocation and rider satisfaction. Built a live dashboard with traffic-light scoring.</p>
+      <div class="tech">Google Sheets · PivotTables · Dashboard Design</div>
+      <a href="https://docs.google.com/spreadsheets/d/1jpebBpAIhCWV5m3DZDfuVK-3CIeuIwH9DLOZXmhV4yE/edit?usp=sharing" target="_blank" class="btn-link">View Project →</a>
+    </div>
+
+  </div>
+
+  <!-- ==================== EXPERIENCE ==================== -->
+  <h2 class="section-title">Work Experience</h2>
+
+  <div class="exp-item">
+    <h3>Supply Chain &amp; Operations Executive</h3>
+    <div class="company">The Avenue Marquees · Islamabad</div>
+    <div class="date">May 2025 – Dec 2025</div>
+    <ul>
+      <li>Sourced and coordinated with catering, decor, and general supplies vendors to ensure timely availability of event materials.</li>
+      <li>Maintained stock records and ensured timely replenishment before stock fell below thresholds.</li>
+      <li>Coordinated with accounts department to process vendor payments and reconcile invoices.</li>
+    </ul>
+  </div>
+
+  <div class="exp-item">
+    <h3>Account Manager &amp; Customer Support Manager</h3>
+    <div class="company">Gift Wows / Tactically Prepped · Remote, US</div>
+    <div class="date">Jan 2024 – Sep 2024</div>
+    <ul>
+      <li>Managed client relationships and coordinated order fulfillment for high-volume online marketplace operations.</li>
+      <li>Handled 100+ customer inquiries per week, ensuring timely issue resolution and high satisfaction rates.</li>
+      <li>Negotiated agreements with suppliers and clients to secure favorable business terms.</li>
+    </ul>
+  </div>
+
+  <div class="exp-item">
+    <h3>TikTok Shop Manager &amp; Product Sourcing</h3>
+    <div class="company">Star Tech Marketing · Remote, US</div>
+    <div class="date">Jan 2023 – Nov 2023</div>
+    <ul>
+      <li>Led product research and supplier outreach, identifying 20+ profitable products aligned with market demand trends.</li>
+      <li>Coordinated procurement activities to maintain steady product supply for online marketplace operations.</li>
+    </ul>
+  </div>
+
+  <div class="exp-item">
+    <h3>Amazon Account Manager &amp; Supply Chain Operations</h3>
+    <div class="company">Cart LLC · Remote, US</div>
+    <div class="date">Sep 2021 – Aug 2022</div>
+    <ul>
+      <li>Managed sourcing and procurement operations with 3+ suppliers, negotiating purchasing terms to maintain competitive margins.</li>
+      <li>Monitored sales performance and demand trends to reduce potential stockouts.</li>
+    </ul>
+  </div>
+
+  <div class="exp-item">
+    <h3>TikTok Shop Manager &amp; E-Commerce Operations</h3>
+    <div class="company">Cross Club Ltd · Remote, UK</div>
+    <div class="date">Nov 2021 – Aug 2022</div>
+    <ul>
+      <li>Managed product sourcing, supplier coordination, and inventory tracking for 10+ products.</li>
+      <li>Implemented product selection and pricing strategies to improve sales performance.</li>
+    </ul>
+  </div>
+
+  <div class="exp-item">
+    <h3>Amazon Account Manager – Wholesale Operations</h3>
+    <div class="company">Micnet LLC · Remote, US</div>
+    <div class="date">Apr 2021 – Sep 2021</div>
+    <ul>
+      <li>Managed wholesale sourcing, procurement coordination, and supplier relationships.</li>
+      <li>Analyzed sales data to guide sourcing and product selection decisions.</li>
+    </ul>
+  </div>
+
+  <!-- ==================== EDUCATION ==================== -->
+  <h2 class="section-title">Education</h2>
+  <div class="exp-item">
+    <h3>Bachelor of Business Administration (BBA)</h3>
+    <div class="company">National University of Modern Languages · Islamabad</div>
+    <div class="date">Aug 2021 – Jun 2026</div>
+    <p style="color:#2d3748; font-size:0.95rem;">Specialization in Supply Chain Management, Procurement, and Logistics.</p>
+  </div>
+
+  <!-- ==================== CERTIFICATIONS ==================== -->
+  <h2 class="section-title">Certifications</h2>
+  <div class="cert-grid">
+    <span class="cert-item">📜 Google Project Management – Coursera</span>
+    <span class="cert-item">📜 Foundations: Data, Data, Everywhere – Coursera</span>
+    <span class="cert-item">📜 Ask Questions to Make Data-Driven Decisions – Coursera</span>
+  </div>
+
+  <!-- ==================== LANGUAGES ==================== -->
+  <h2 class="section-title">Languages</h2>
+  <div class="lang-grid">
+    <span class="lang-item">🇵🇰 Urdu – Native</span>
+    <span class="lang-item">🇬🇧 English – Professional Working</span>
+  </div>
+
+  <!-- ==================== INTERESTS ==================== -->
+  <h2 class="section-title">Interests</h2>
+  <div class="skills-grid">
+    <span class="skill-tag">🏏 Cricket Player – ANFA Cricket Club, Uzbekistan</span>
+    <span class="skill-tag">📈 Independent Forex Trader – XAUUSD &amp; EURUSD</span>
+  </div>
+
+  <!-- ==================== FOOTER ==================== -->
+  <div class="footer">
+    © 2026 Saif Khalid Afridi. Built with ❤️ on GitHub Pages.
+  </div>
+
+</div>
+
+</body>
+</html>
