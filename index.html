@@ -12,79 +12,198 @@
       box-sizing: border-box;
     }
 
-    body {
-      font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #0f0f1a;
-      color: #e4e4ef;
-      line-height: 1.7;
-      padding: 2rem 1rem;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    html {
+      scroll-behavior: smooth;
     }
 
+    body {
+      font-family: 'Inter', 'Segoe UI', sans-serif;
+      background: #0a0a1a;
+      color: #e4e4ef;
+      line-height: 1.7;
+      padding: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ---------- ANIMATED BACKGROUND ---------- */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background:
+        radial-gradient(circle at 10% 20%, rgba(79, 70, 229, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 90% 80%, rgba(124, 58, 237, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.3) 0%, transparent 100%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* ---------- FLOATING PARTICLES ---------- */
+    .particle {
+      position: fixed;
+      border-radius: 50%;
+      background: rgba(79, 70, 229, 0.15);
+      pointer-events: none;
+      z-index: 0;
+      animation: floatParticle linear infinite;
+    }
+
+    @keyframes floatParticle {
+      0% {
+        transform: translateY(100vh) scale(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1);
+        opacity: 0;
+      }
+    }
+
+    /* ---------- CONTAINER ---------- */
     .container {
       max-width: 1100px;
-      width: 100%;
       margin: 0 auto;
-      background: linear-gradient(145deg, #1a1a2e, #16213e);
+      padding: 2.5rem 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ---------- GLASS CARD ---------- */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 32px;
       padding: 3rem 2.5rem;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      backdrop-filter: blur(2px);
-      transition: all 0.3s ease;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+      transition: all 0.4s ease;
+    }
+
+    .glass-card:hover {
+      border-color: rgba(79, 70, 229, 0.2);
+      box-shadow: 0 30px 80px rgba(79, 70, 229, 0.08);
     }
 
     /* ---------- HEADER ---------- */
     .header {
       text-align: center;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      padding-bottom: 2rem;
+      padding-bottom: 2.5rem;
       margin-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .avatar-wrapper {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 1.2rem;
+    }
+
+    .avatar-wrapper .ring {
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, #4f46e5, #7c3aed, #4f46e5);
+      padding: 3px;
+      animation: spin 4s linear infinite;
+      mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #fff calc(100% - 2px));
+      -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #fff calc(100% - 2px));
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     .avatar {
       width: 130px;
       height: 130px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #4f46e5, #7c3aed);
-      display: inline-flex;
+      background: linear-gradient(135deg, #1a1a2e, #2d2d44);
+      display: flex;
       align-items: center;
       justify-content: center;
       font-size: 3.5rem;
       font-weight: 700;
       color: #ffffff;
-      margin-bottom: 1.2rem;
-      border: 4px solid rgba(255, 255, 255, 0.15);
-      box-shadow: 0 8px 30px rgba(79, 70, 229, 0.3);
+      position: relative;
+      z-index: 1;
     }
 
-    h1 {
+    .header h1 {
       font-size: 2.8rem;
       font-weight: 700;
       color: #ffffff;
       letter-spacing: -0.5px;
+      margin-bottom: 0.3rem;
     }
 
-    .title {
+    .header .title {
       font-size: 1.2rem;
       color: #818cf8;
       font-weight: 500;
-      margin-top: 0.25rem;
     }
 
-    .tagline {
+    .header .tagline {
       font-size: 1rem;
-      color: #a5b4fc;
+      color: #94a3b8;
       margin-top: 0.5rem;
       max-width: 600px;
       margin-left: auto;
       margin-right: auto;
-      opacity: 0.8;
     }
 
+    /* ---------- TYPING ANIMATION ---------- */
+    .typing-wrapper {
+      display: inline-block;
+      margin-top: 0.2rem;
+    }
+
+    .typing-text {
+      display: inline-block;
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 2px solid #818cf8;
+      animation: typing 3s steps(40, end) infinite, blink-caret 0.75s step-end infinite;
+      color: #a5b4fc;
+      font-size: 1rem;
+      font-weight: 400;
+    }
+
+    @keyframes typing {
+      0% {
+        width: 0;
+      }
+      50% {
+        width: 100%;
+      }
+      100% {
+        width: 0;
+      }
+    }
+
+    @keyframes blink-caret {
+      0%,
+      100% {
+        border-color: transparent;
+      }
+      50% {
+        border-color: #818cf8;
+      }
+    }
+
+    /* ---------- BADGES ---------- */
     .badges {
       margin-top: 1.5rem;
     }
@@ -97,13 +216,13 @@
       font-weight: 600;
       font-size: 0.9rem;
       margin: 0.3rem;
-      transition: all 0.25s ease;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.3s ease;
+      border: 1px solid transparent;
     }
 
     .badges a:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
     }
 
     .btn-linkedin {
@@ -140,6 +259,18 @@
       border-bottom: 3px solid #4f46e5;
       display: inline-block;
       letter-spacing: -0.3px;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 60%;
+      height: 3px;
+      background: linear-gradient(90deg, #4f46e5, transparent);
+      border-radius: 2px;
     }
 
     /* ---------- ABOUT ---------- */
@@ -164,20 +295,22 @@
     }
 
     .skill-tag {
-      background: rgba(79, 70, 229, 0.15);
-      border: 1px solid rgba(79, 70, 229, 0.2);
-      padding: 0.4rem 1.3rem;
+      background: rgba(79, 70, 229, 0.12);
+      border: 1px solid rgba(79, 70, 229, 0.15);
+      padding: 0.5rem 1.4rem;
       border-radius: 30px;
       font-size: 0.85rem;
       font-weight: 500;
       color: #c7d2fe;
-      transition: all 0.2s ease;
+      transition: all 0.3s ease;
+      cursor: default;
     }
 
     .skill-tag:hover {
       background: rgba(79, 70, 229, 0.25);
-      border-color: rgba(79, 70, 229, 0.4);
-      transform: translateY(-2px);
+      border-color: #4f46e5;
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 6px 20px rgba(79, 70, 229, 0.15);
     }
 
     /* ---------- PROJECTS ---------- */
@@ -191,22 +324,51 @@
     .project-card {
       background: rgba(255, 255, 255, 0.04);
       backdrop-filter: blur(4px);
-      border-radius: 16px;
-      padding: 1.8rem 1.5rem;
+      border-radius: 18px;
+      padding: 2rem 1.5rem;
       border: 1px solid rgba(255, 255, 255, 0.06);
-      transition: all 0.3s ease;
+      transition: all 0.4s ease;
       display: flex;
       flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, #4f46e5, #7c3aed, #4f46e5);
+      background-size: 200% 100%;
+      animation: shimmer 3s linear infinite;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .project-card:hover::before {
+      opacity: 1;
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: -200% 0;
+      }
+      100% {
+        background-position: 200% 0;
+      }
     }
 
     .project-card:hover {
       border-color: #4f46e5;
-      box-shadow: 0 8px 30px rgba(79, 70, 229, 0.12);
-      transform: translateY(-4px);
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(79, 70, 229, 0.12);
     }
 
     .project-card .icon {
-      font-size: 2rem;
+      font-size: 2.2rem;
       margin-bottom: 0.5rem;
     }
 
@@ -241,25 +403,29 @@
       font-size: 0.85rem;
       text-align: center;
       font-weight: 600;
-      transition: all 0.25s ease;
+      transition: all 0.3s ease;
       border: 1px solid transparent;
     }
 
     .project-card .btn-link:hover {
       background: #4338ca;
       transform: scale(1.02);
+      box-shadow: 0 6px 20px rgba(79, 70, 229, 0.3);
     }
 
     /* ---------- EXPERIENCE ---------- */
     .exp-item {
       margin-bottom: 1.8rem;
-      padding-left: 1rem;
-      border-left: 3px solid rgba(79, 70, 229, 0.4);
-      transition: border-color 0.3s ease;
+      padding: 1rem 1.2rem 1rem 1.5rem;
+      border-left: 3px solid rgba(79, 70, 229, 0.3);
+      transition: all 0.4s ease;
+      border-radius: 0 12px 12px 0;
+      background: rgba(255, 255, 255, 0.02);
     }
 
     .exp-item:hover {
       border-left-color: #818cf8;
+      background: rgba(79, 70, 229, 0.04);
     }
 
     .exp-item h3 {
@@ -309,10 +475,10 @@
 
     .cert-item {
       background: rgba(255, 255, 255, 0.04);
-      padding: 0.5rem 1.2rem;
-      border-radius: 12px;
+      padding: 0.6rem 1.3rem;
+      border-radius: 14px;
       border: 1px solid rgba(255, 255, 255, 0.06);
-      transition: all 0.25s ease;
+      transition: all 0.35s ease;
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
@@ -321,6 +487,8 @@
     .cert-item:hover {
       border-color: #4f46e5;
       background: rgba(79, 70, 229, 0.1);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(79, 70, 229, 0.12);
     }
 
     .cert-item a {
@@ -328,6 +496,7 @@
       text-decoration: none;
       font-weight: 500;
       font-size: 0.9rem;
+      transition: color 0.2s;
     }
 
     .cert-item a:hover {
@@ -338,10 +507,16 @@
     /* ---------- EDUCATION ---------- */
     .edu-item {
       background: rgba(255, 255, 255, 0.03);
-      border-radius: 14px;
+      border-radius: 16px;
       padding: 1.2rem 1.5rem;
       border: 1px solid rgba(255, 255, 255, 0.05);
       margin-top: 0.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .edu-item:hover {
+      border-color: rgba(79, 70, 229, 0.2);
+      background: rgba(79, 70, 229, 0.04);
     }
 
     .edu-item h3 {
@@ -370,19 +545,20 @@
 
     .lang-item,
     .interest-item {
-      background: rgba(255, 255, 255, 0.04);
-      padding: 0.3rem 1.2rem;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 0.4rem 1.2rem;
       border-radius: 30px;
       border: 1px solid rgba(255, 255, 255, 0.05);
       color: #c7d2fe;
       font-size: 0.9rem;
-      transition: all 0.2s ease;
+      transition: all 0.3s ease;
     }
 
     .lang-item:hover,
     .interest-item:hover {
       border-color: #4f46e5;
       background: rgba(79, 70, 229, 0.08);
+      transform: translateY(-2px);
     }
 
     /* ---------- FOOTER ---------- */
@@ -390,7 +566,7 @@
       text-align: center;
       margin-top: 3.5rem;
       padding-top: 1.8rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
       color: #64748b;
       font-size: 0.9rem;
     }
@@ -402,15 +578,48 @@
 
     .footer a:hover {
       color: #a5b4fc;
-      text-decoration: underline;
+    }
+
+    /* ---------- SCROLL ANIMATION ---------- */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.8s ease forwards;
+    }
+
+    .fade-in-delay-1 {
+      animation-delay: 0.1s;
+    }
+    .fade-in-delay-2 {
+      animation-delay: 0.2s;
+    }
+    .fade-in-delay-3 {
+      animation-delay: 0.3s;
+    }
+    .fade-in-delay-4 {
+      animation-delay: 0.4s;
+    }
+    .fade-in-delay-5 {
+      animation-delay: 0.5s;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* ---------- RESPONSIVE ---------- */
     @media (max-width: 768px) {
-      .container {
+      .glass-card {
         padding: 1.8rem 1.2rem;
+        border-radius: 20px;
       }
-      h1 {
+      .container {
+        padding: 1rem 0.8rem;
+      }
+      .header h1 {
         font-size: 2rem;
       }
       .projects-grid {
@@ -431,196 +640,267 @@
         flex-direction: column;
         align-items: stretch;
       }
+      .typing-text {
+        font-size: 0.85rem;
+        white-space: normal;
+        border-right: none;
+        animation: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .glass-card {
+        padding: 1.2rem 0.8rem;
+      }
+      .header h1 {
+        font-size: 1.6rem;
+      }
+      .section-title {
+        font-size: 1.3rem;
+      }
+      .exp-item {
+        padding: 0.8rem 0.8rem 0.8rem 1rem;
+      }
     }
   </style>
 </head>
 <body>
 
-<div class="container">
+  <!-- ==================== PARTICLES ==================== -->
+  <div id="particles"></div>
 
-  <!-- ==================== HEADER ==================== -->
-  <div class="header">
-    <div class="avatar">SK</div>
-    <h1>Saif Khalid Afridi</h1>
-    <div class="title">Supply Chain &amp; Procurement Professional | Data Analytics Enthusiast</div>
-    <p class="tagline">Bridging supply chain operations with data-driven decision making</p>
-    <div class="badges">
-      <a href="https://www.linkedin.com/in/saif-khalid-afridi" target="_blank" class="btn-linkedin">🔗 LinkedIn</a>
-      <a href="https://github.com/saifafridi2727" target="_blank" class="btn-github">🐙 GitHub</a>
-      <a href="mailto:saifafridi2727@gmail.com" class="btn-email">✉️ Email</a>
+  <!-- ==================== MAIN CONTENT ==================== -->
+  <div class="container">
+
+    <div class="glass-card">
+
+      <!-- ==================== HEADER ==================== -->
+      <header class="header fade-in fade-in-delay-1">
+        <div class="avatar-wrapper">
+          <div class="ring"></div>
+          <div class="avatar">SK</div>
+        </div>
+        <h1>Saif Khalid Afridi</h1>
+        <div class="title">Supply Chain &amp; Procurement Professional | Data Analytics Enthusiast</div>
+        <div class="tagline">
+          <span class="typing-wrapper">
+            <span class="typing-text">Bridging supply chain operations with data-driven insights</span>
+          </span>
+        </div>
+        <div class="badges">
+          <a href="https://www.linkedin.com/in/saif-khalid-afridi" target="_blank" class="btn-linkedin">🔗 LinkedIn</a>
+          <a href="https://github.com/saifafridi2727" target="_blank" class="btn-github">🐙 GitHub</a>
+          <a href="mailto:saifafridi2727@gmail.com" class="btn-email">✉️ Email</a>
+        </div>
+      </header>
+
+      <!-- ==================== ABOUT ==================== -->
+      <section class="about fade-in fade-in-delay-2">
+        <h2 class="section-title">About Me</h2>
+        <p>Supply Chain &amp; Procurement professional with hands-on experience across sourcing, vendor negotiation, purchase order management, and inventory planning for e-commerce and wholesale operations in the US and UK markets.</p>
+        <p>Skilled in supplier evaluation, cost-effective purchasing decisions, demand forecasting, and maintaining accurate procurement and inventory documentation. Proven track record of coordinating multi-supplier networks to keep replenishment cycles on schedule and reduce stockout risk.</p>
+        <p><span class="highlight">📍 Location:</span> Islamabad, Pakistan</p>
+      </section>
+
+      <!-- ==================== SKILLS ==================== -->
+      <section class="fade-in fade-in-delay-2">
+        <h2 class="section-title">Technical Skills</h2>
+        <div class="skills-grid">
+          <span class="skill-tag">Data Analysis</span>
+          <span class="skill-tag">Google Sheets</span>
+          <span class="skill-tag">Microsoft Excel</span>
+          <span class="skill-tag">PivotTables</span>
+          <span class="skill-tag">Conditional Formatting</span>
+          <span class="skill-tag">COUNTIFS / SUMIFS</span>
+          <span class="skill-tag">Supply Chain Operations</span>
+          <span class="skill-tag">Procurement &amp; Vendor Sourcing</span>
+          <span class="skill-tag">Inventory Planning</span>
+          <span class="skill-tag">Demand Forecasting</span>
+          <span class="skill-tag">Logistics</span>
+          <span class="skill-tag">Purchase Order Management</span>
+          <span class="skill-tag">Supplier Negotiation</span>
+          <span class="skill-tag">Cost &amp; Rate Analysis</span>
+          <span class="skill-tag">Dashboard Design</span>
+        </div>
+      </section>
+
+      <!-- ==================== PROJECTS ==================== -->
+      <section class="fade-in fade-in-delay-3">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="projects-grid">
+
+          <div class="project-card">
+            <div class="icon">📦</div>
+            <h3>ABC Inventory Optimization</h3>
+            <p>Analyzed 3,791 SKUs using the Pareto Principle. Classified products into A, B, and C tiers to optimize inventory management.</p>
+            <div class="tech">Google Sheets · PivotTables · SUMIF</div>
+            <a href="https://docs.google.com/spreadsheets/d/1NfMrxZqVr7xhngXmZXVmVjSDYSCnvGkH2hodnbT22nc/edit?usp=sharing" target="_blank" class="btn-link">View Project →</a>
+          </div>
+
+          <div class="project-card">
+            <div class="icon">🌍</div>
+            <h3>Supply Chain Risk Analysis</h3>
+            <p>Analyzed 5,000+ shipments to identify high-risk ports. Built a Red-Yellow-Green heatmap to visualize delay patterns.</p>
+            <div class="tech">Google Sheets · COUNTIFS · Conditional Formatting</div>
+            <a href="https://docs.google.com/spreadsheets/d/1JFwjJk5EkpbK_RY0vCFmJVKxo4k0WsbhXFxR93LemYc/edit?usp=sharing" target="_blank" class="btn-link">View Project →</a>
+          </div>
+
+          <div class="project-card">
+            <div class="icon">🚚</div>
+            <h3>Amazon Last-Mile Delivery</h3>
+            <p>Analyzed 43,739 deliveries to optimize vehicle allocation and rider satisfaction. Built a live dashboard with traffic-light scoring.</p>
+            <div class="tech">Google Sheets · PivotTables · Dashboard Design</div>
+            <a href="https://docs.google.com/spreadsheets/d/1jpebBpAIhCWV5m3DZDfuVK-3CIeuIwH9DLOZXmhV4yE/edit?usp=sharing" target="_blank" class="btn-link">View Project →</a>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==================== EXPERIENCE ==================== -->
+      <section class="fade-in fade-in-delay-4">
+        <h2 class="section-title">Work Experience</h2>
+
+        <div class="exp-item">
+          <h3>Supply Chain &amp; Operations Executive</h3>
+          <div class="company">The Avenue Marquees · Islamabad</div>
+          <div class="date">May 2025 – Dec 2025</div>
+          <ul>
+            <li>Sourced and coordinated with catering, decor, and general supplies vendors to ensure timely availability of event materials.</li>
+            <li>Maintained stock records and ensured timely replenishment before stock fell below thresholds.</li>
+            <li>Coordinated with accounts department to process vendor payments and reconcile invoices.</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <h3>Account Manager &amp; Customer Support Manager</h3>
+          <div class="company">Gift Wows / Tactically Prepped · Remote, US</div>
+          <div class="date">Jan 2024 – Sep 2024</div>
+          <ul>
+            <li>Managed client relationships and coordinated order fulfillment for high-volume online marketplace operations.</li>
+            <li>Handled 100+ customer inquiries per week, ensuring timely issue resolution and high satisfaction rates.</li>
+            <li>Negotiated agreements with suppliers and clients to secure favorable business terms.</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <h3>TikTok Shop Manager &amp; Product Sourcing</h3>
+          <div class="company">Star Tech Marketing · Remote, US</div>
+          <div class="date">Jan 2023 – Nov 2023</div>
+          <ul>
+            <li>Led product research and supplier outreach, identifying 20+ profitable products aligned with market demand trends.</li>
+            <li>Coordinated procurement activities to maintain steady product supply for online marketplace operations.</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <h3>Amazon Account Manager &amp; Supply Chain Operations</h3>
+          <div class="company">Cart LLC · Remote, US</div>
+          <div class="date">Sep 2021 – Aug 2022</div>
+          <ul>
+            <li>Managed sourcing and procurement operations with 3+ suppliers, negotiating purchasing terms to maintain competitive margins.</li>
+            <li>Monitored sales performance and demand trends to reduce potential stockouts.</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <h3>TikTok Shop Manager &amp; E-Commerce Operations</h3>
+          <div class="company">Cross Club Ltd · Remote, UK</div>
+          <div class="date">Nov 2021 – Aug 2022</div>
+          <ul>
+            <li>Managed product sourcing, supplier coordination, and inventory tracking for 10+ products.</li>
+            <li>Implemented product selection and pricing strategies to improve sales performance.</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <h3>Amazon Account Manager – Wholesale Operations</h3>
+          <div class="company">Micnet LLC · Remote, US</div>
+          <div class="date">Apr 2021 – Sep 2021</div>
+          <ul>
+            <li>Managed wholesale sourcing, procurement coordination, and supplier relationships.</li>
+            <li>Analyzed sales data to guide sourcing and product selection decisions.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ==================== EDUCATION ==================== -->
+      <section class="fade-in fade-in-delay-4">
+        <h2 class="section-title">Education</h2>
+        <div class="edu-item">
+          <h3>Bachelor of Business Administration (BBA)</h3>
+          <div class="edu-meta">National University of Modern Languages · Islamabad</div>
+          <div class="date" style="color:#94a3b8; font-size:0.85rem;">Aug 2021 – Jun 2026</div>
+          <p style="margin-top:0.3rem;">Specialization in Supply Chain Management, Procurement, and Logistics.</p>
+        </div>
+      </section>
+
+      <!-- ==================== CERTIFICATIONS ==================== -->
+      <section class="fade-in fade-in-delay-5">
+        <h2 class="section-title">Certifications</h2>
+        <div class="cert-grid">
+
+          <span class="cert-item">
+            📜 <a href="https://www.coursera.org/account/accomplishments/verify/L1PYAUZGSFQM" target="_blank">Google Project Management – Coursera</a>
+          </span>
+
+          <span class="cert-item">
+            📜 <a href="https://www.coursera.org/account/accomplishments/verify/YEDWLC38MRN1" target="_blank">Foundations: Data, Data, Everywhere – Coursera</a>
+          </span>
+
+          <span class="cert-item">
+            📜 <a href="https://www.coursera.org/account/accomplishments/verify/01RZTBAUBV9O" target="_blank">Ask Questions to Make Data-Driven Decisions – Coursera</a>
+          </span>
+
+        </div>
+      </section>
+
+      <!-- ==================== LANGUAGES ==================== -->
+      <section class="fade-in fade-in-delay-5">
+        <h2 class="section-title">Languages</h2>
+        <div class="lang-grid">
+          <span class="lang-item">🇵🇰 Urdu – Native</span>
+          <span class="lang-item">🇬🇧 English – Professional Working</span>
+        </div>
+      </section>
+
+      <!-- ==================== INTERESTS ==================== -->
+      <section class="fade-in fade-in-delay-5">
+        <h2 class="section-title">Interests</h2>
+        <div class="interests-grid">
+          <span class="interest-item">🏏 Cricket Player – ANFA Cricket Club, Uzbekistan</span>
+          <span class="interest-item">📈 Independent Forex Trader – XAUUSD &amp; EURUSD</span>
+        </div>
+      </section>
+
+      <!-- ==================== FOOTER ==================== -->
+      <footer class="footer fade-in fade-in-delay-5">
+        © 2026 Saif Khalid Afridi. Built with ❤️ on GitHub Pages.
+      </footer>
+
     </div>
   </div>
 
-  <!-- ==================== ABOUT ==================== -->
-  <div class="about">
-    <h2 class="section-title">About Me</h2>
-    <p>Supply Chain &amp; Procurement professional with hands-on experience across sourcing, vendor negotiation, purchase order management, and inventory planning for e-commerce and wholesale operations in the US and UK markets.</p>
-    <p>Skilled in supplier evaluation, cost-effective purchasing decisions, demand forecasting, and maintaining accurate procurement and inventory documentation. Proven track record of coordinating multi-supplier networks to keep replenishment cycles on schedule and reduce stockout risk.</p>
-    <p><span class="highlight">📍 Location:</span> Islamabad, Pakistan</p>
-  </div>
+  <!-- ==================== PARTICLE SCRIPT ==================== -->
+  <script>
+    // Create floating particles
+    document.addEventListener('DOMContentLoaded', function() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 30;
 
-  <!-- ==================== SKILLS ==================== -->
-  <h2 class="section-title">Technical Skills</h2>
-  <div class="skills-grid">
-    <span class="skill-tag">Data Analysis</span>
-    <span class="skill-tag">Google Sheets</span>
-    <span class="skill-tag">Microsoft Excel</span>
-    <span class="skill-tag">PivotTables</span>
-    <span class="skill-tag">Conditional Formatting</span>
-    <span class="skill-tag">COUNTIFS / SUMIFS</span>
-    <span class="skill-tag">Supply Chain Operations</span>
-    <span class="skill-tag">Procurement &amp; Vendor Sourcing</span>
-    <span class="skill-tag">Inventory Planning</span>
-    <span class="skill-tag">Demand Forecasting</span>
-    <span class="skill-tag">Logistics</span>
-    <span class="skill-tag">Purchase Order Management</span>
-    <span class="skill-tag">Supplier Negotiation</span>
-    <span class="skill-tag">Cost &amp; Rate Analysis</span>
-    <span class="skill-tag">Dashboard Design</span>
-  </div>
-
-  <!-- ==================== PROJECTS ==================== -->
-  <h2 class="section-title">Featured Projects</h2>
-  <div class="projects-grid">
-
-    <div class="project-card">
-      <div class="icon">📦</div>
-      <h3>ABC Inventory Optimization</h3>
-      <p>Analyzed 3,791 SKUs using the Pareto Principle. Classified products into A, B, and C tiers to optimize inventory management.</p>
-      <div class="tech">Google Sheets · PivotTables · SUMIF</div>
-      <a href="https://docs.google.com/spreadsheets/d/1NfMrxZqVr7xhngXmZXVmVjSDYSCnvGkH2hodnbT22nc/edit?usp=sharing" target="_blank" class="btn-link">View Project →</a>
-    </div>
-
-    <div class="project-card">
-      <div class="icon">🌍</div>
-      <h3>Supply Chain Risk Analysis</h3>
-      <p>Analyzed 5,000+ shipments to identify high-risk ports. Built a Red-Yellow-Green heatmap to visualize delay patterns.</p>
-      <div class="tech">Google Sheets · COUNTIFS · Conditional Formatting</div>
-      <a href="https://docs.google.com/spreadsheets/d/1JFwjJk5EkpbK_RY0vCFmJVKxo4k0WsbhXFxR93LemYc/edit?usp=sharing" target="_blank" class="btn-link">View Project →</a>
-    </div>
-
-    <div class="project-card">
-      <div class="icon">🚚</div>
-      <h3>Amazon Last-Mile Delivery</h3>
-      <p>Analyzed 43,739 deliveries to optimize vehicle allocation and rider satisfaction. Built a live dashboard with traffic-light scoring.</p>
-      <div class="tech">Google Sheets · PivotTables · Dashboard Design</div>
-      <a href="https://docs.google.com/spreadsheets/d/1jpebBpAIhCWV5m3DZDfuVK-3CIeuIwH9DLOZXmhV4yE/edit?usp=sharing" target="_blank" class="btn-link">View Project →</a>
-    </div>
-
-  </div>
-
-  <!-- ==================== EXPERIENCE ==================== -->
-  <h2 class="section-title">Work Experience</h2>
-
-  <div class="exp-item">
-    <h3>Supply Chain &amp; Operations Executive</h3>
-    <div class="company">The Avenue Marquees · Islamabad</div>
-    <div class="date">May 2025 – Dec 2025</div>
-    <ul>
-      <li>Sourced and coordinated with catering, decor, and general supplies vendors to ensure timely availability of event materials.</li>
-      <li>Maintained stock records and ensured timely replenishment before stock fell below thresholds.</li>
-      <li>Coordinated with accounts department to process vendor payments and reconcile invoices.</li>
-    </ul>
-  </div>
-
-  <div class="exp-item">
-    <h3>Account Manager &amp; Customer Support Manager</h3>
-    <div class="company">Gift Wows / Tactically Prepped · Remote, US</div>
-    <div class="date">Jan 2024 – Sep 2024</div>
-    <ul>
-      <li>Managed client relationships and coordinated order fulfillment for high-volume online marketplace operations.</li>
-      <li>Handled 100+ customer inquiries per week, ensuring timely issue resolution and high satisfaction rates.</li>
-      <li>Negotiated agreements with suppliers and clients to secure favorable business terms.</li>
-    </ul>
-  </div>
-
-  <div class="exp-item">
-    <h3>TikTok Shop Manager &amp; Product Sourcing</h3>
-    <div class="company">Star Tech Marketing · Remote, US</div>
-    <div class="date">Jan 2023 – Nov 2023</div>
-    <ul>
-      <li>Led product research and supplier outreach, identifying 20+ profitable products aligned with market demand trends.</li>
-      <li>Coordinated procurement activities to maintain steady product supply for online marketplace operations.</li>
-    </ul>
-  </div>
-
-  <div class="exp-item">
-    <h3>Amazon Account Manager &amp; Supply Chain Operations</h3>
-    <div class="company">Cart LLC · Remote, US</div>
-    <div class="date">Sep 2021 – Aug 2022</div>
-    <ul>
-      <li>Managed sourcing and procurement operations with 3+ suppliers, negotiating purchasing terms to maintain competitive margins.</li>
-      <li>Monitored sales performance and demand trends to reduce potential stockouts.</li>
-    </ul>
-  </div>
-
-  <div class="exp-item">
-    <h3>TikTok Shop Manager &amp; E-Commerce Operations</h3>
-    <div class="company">Cross Club Ltd · Remote, UK</div>
-    <div class="date">Nov 2021 – Aug 2022</div>
-    <ul>
-      <li>Managed product sourcing, supplier coordination, and inventory tracking for 10+ products.</li>
-      <li>Implemented product selection and pricing strategies to improve sales performance.</li>
-    </ul>
-  </div>
-
-  <div class="exp-item">
-    <h3>Amazon Account Manager – Wholesale Operations</h3>
-    <div class="company">Micnet LLC · Remote, US</div>
-    <div class="date">Apr 2021 – Sep 2021</div>
-    <ul>
-      <li>Managed wholesale sourcing, procurement coordination, and supplier relationships.</li>
-      <li>Analyzed sales data to guide sourcing and product selection decisions.</li>
-    </ul>
-  </div>
-
-  <!-- ==================== EDUCATION ==================== -->
-  <h2 class="section-title">Education</h2>
-  <div class="edu-item">
-    <h3>Bachelor of Business Administration (BBA)</h3>
-    <div class="edu-meta">National University of Modern Languages · Islamabad</div>
-    <div class="date" style="color:#94a3b8; font-size:0.85rem;">Aug 2021 – Jun 2026</div>
-    <p style="margin-top:0.3rem;">Specialization in Supply Chain Management, Procurement, and Logistics.</p>
-  </div>
-
-  <!-- ==================== CERTIFICATIONS ==================== -->
-  <h2 class="section-title">Certifications</h2>
-  <div class="cert-grid">
-
-    <span class="cert-item">
-      📜 <a href="https://www.coursera.org/account/accomplishments/verify/L1PYAUZGSFQM" target="_blank">Google Project Management – Coursera</a>
-    </span>
-
-    <span class="cert-item">
-      📜 <a href="https://www.coursera.org/account/accomplishments/verify/L1PYAUZGSFQM" target="_blank">Foundations: Data, Data, Everywhere – Coursera</a>
-    </span>
-
-    <span class="cert-item">
-      📜 <a href="https://www.coursera.org/account/accomplishments/verify/01RZTBAUBV9O" target="_blank">Ask Questions to Make Data-Driven Decisions – Coursera</a>
-    </span>
-
-  </div>
-
-  <!-- ==================== LANGUAGES ==================== -->
-  <h2 class="section-title">Languages</h2>
-  <div class="lang-grid">
-    <span class="lang-item">🇵🇰 Urdu – Native</span>
-    <span class="lang-item">🇬🇧 English – Professional Working</span>
-  </div>
-
-  <!-- ==================== INTERESTS ==================== -->
-  <h2 class="section-title">Interests</h2>
-  <div class="interests-grid">
-    <span class="interest-item">🏏 Cricket Player – ANFA Cricket Club, Uzbekistan</span>
-    <span class="interest-item">📈 Independent Forex Trader – XAUUSD &amp; EURUSD</span>
-  </div>
-
-  <!-- ==================== FOOTER ==================== -->
-  <div class="footer">
-    © 2026 Saif Khalid Afridi. Built with ❤️ on GitHub Pages.
-  </div>
-
-</div>
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        const size = Math.random() * 6 + 2;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDuration = (Math.random() * 20 + 15) + 's';
+        particle.style.animationDelay = (Math.random() * 20) + 's';
+        particle.style.opacity = Math.random() * 0.3 + 0.1;
+        particlesContainer.appendChild(particle);
+      }
+    });
+  </script>
 
 </body>
 </html>
